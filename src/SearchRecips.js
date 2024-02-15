@@ -1,14 +1,14 @@
 import React from "react";
 import axios from "axios";
 
-function SearchReceps(){
-    const [receps, setReceps] = React.useState([])
-    const [inputReceps, setInputReceps] = React.useState('')
+function SearchRecips(){
+    const [recips, setRecips] = React.useState([])
+    const [inputRecips, setInputRecips] = React.useState('')
 
-    const viewReceps = axios.create({
+    const viewRecips = axios.create({
         baseURL: 'https://api.spoonacular.com/recipes/complexSearch/',
         params: {
-            'query': inputReceps,
+            'query': inputRecips,
             'apiKey': '375b7f317dd841898f4e6c7d8ae41522',
             'instructionsRequired': true,
             'addRecipeInformation': true
@@ -20,12 +20,12 @@ function SearchReceps(){
 
     // const viewListReceps = receps.map(item => item.analyzedInstructions[0].steps) // Con esta variable en console.log() pude conocer la data que contiene para despues utilizarla en el return de la funcion componente
 
-    const listReceps = async()=>{
-        const {data, status} = await viewReceps.get()
+    const listRecips = async()=>{
+        const {data, status} = await viewRecips.get()
 
         try{
             if(status === 200, 201){
-                setReceps(data.results)
+                setRecips(data.results)
             }
         }catch(error){
             console.warn(error)
@@ -35,18 +35,19 @@ function SearchReceps(){
     return(
         <div>
             <h2>Recetas</h2>
+
             <input
             placeholder="Buscar receta"
-            value={inputReceps}
+            value={inputRecips}
             onChange={(event)=>{
-                setInputReceps(event.target.value)
+                setInputRecips(event.target.value)
             }}
             />
             <button
-            onClick={listReceps}
+            onClick={listRecips}
             >Seleccionar</button>
 
-            {receps.map((item, index)=>(
+            {recips.map((item, index)=>(
                 <div key={index}>
                     <p>{item.title}</p>
                     <img
@@ -62,19 +63,10 @@ function SearchReceps(){
                             </li> // esta es la manera de poder agregar la receta para cada plato
                         ))}
                     </ul>
-
-                    
-                    {/* <ul>
-                        {stepsReceps[index]?.analyzedInstructions[0]?.steps.map((step, stepIndex) => (
-                            <li key={stepIndex}>
-                                {step.step}
-                            </li>
-                        ))}
-                    </ul> */}
                 </div>
             ))}
         </div>
     )
 }
 
-export  { SearchReceps }
+export  { SearchRecips }

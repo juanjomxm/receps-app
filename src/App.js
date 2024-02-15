@@ -1,11 +1,13 @@
 import React from "react";
 
-import { SearchReceps } from "./SearchReceps"
+import { SearchRecips } from "./SearchRecips"
 
 function App() {
   return (
     <React.Fragment>
-      <SearchReceps/>
+      <SearchRecips/>
+      <h1>Noticias</h1>
+      <SearchIngredients/>
     </React.Fragment>
   )
 }
